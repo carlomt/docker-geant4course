@@ -1,0 +1,86 @@
+version: "3.9"
+services:
+   xeyes:
+      image: "carlomt/xeyes"
+      stdin_open: true 
+      tty: true
+      volumes:
+         - X11-unix:/tmp/.X11-unix      
+      environment:
+         - DISPLAY=${DOCKERDISPLAY}
+   gears:
+      image: "carlomt/gears"
+      stdin_open: true 
+      tty: true
+      volumes:
+         - X11-unix:/tmp/.X11-unix      
+      environment:
+         - DISPLAY=${DOCKERDISPLAY}         
+   geant4:
+      # user: $(id -u):$(id -g)
+      image: "carlomt/geant4course"
+      stdin_open: true 
+      tty: true
+      environment:
+         - DISPLAY=${DOCKERDISPLAY}        
+      entrypoint: ["/usr/bin/bash", "-l"]
+      volumes:
+         - X11-unix:/tmp/.X11-unix
+         - ./geant4-datasets:/opt/geant4/data:ro
+         - ./geant4-source:/usr/local/geant4
+         - docker-home:/root
+         - ./geant4-exercises:/root/geant4-exercises         
+      working_dir: /root
+      # depends_on:
+      #    data-downloader:
+      #      condition: service_completed_successfully
+   prepare:
+      image: "carlomt/geant4"
+      command:
+        - |
+          /opt/geant4/bin/geant4-config --install-datasets 
+          /usr/bin/wget -O /usr/local/geant4/geant4.tar.gz https://geant4-data.web.cern.ch/geant4-data/releases/source/geant4-v11.1.1.tar.gz
+          /usr/bin/tar -xvf   /usr/local/geant4/geant4.tar.gz -C /usr/local/geant4/
+          rm /usr/local/geant4/geant4.tar.gz
+          
+      stdin_open: true       
+      tty: true      
+      volumes:
+         - ./geant4-datasets:/opt/geant4/data
+         - ./geant4-source:/usr/local/geant4/
+   root:
+      image: "rootproject/root:6.26.14-ubuntu20.04"
+      stdin_open: true 
+      tty: true
+      environment:
+         - DISPLAY=${DOCKERDISPLAY}                 
+      entrypoint: ["/usr/bin/bash", "-l"]
+      volumes:
+         - X11-unix:/tmp/.X11-unix        
+         - docker-home:/root
+         - ./geant4-exercises:/root/geant4-exercises                  
+      working_dir: /root
+      volumes:
+         - X11-unix:/tmp/.X11-unix        
+         - ./docker-home:/root
+         - ./geant4-exercises:/root/geant4-exercises                  
+      working_dir: /root      
+volumes:
+   geant4-datasets:
+      external: true
+   geant4-source:
+      external: true
+   geant4-exercises:
+      external: true
+   docker-home:
+       driver: local
+       driver_opts:
+          type: 'none'
+          o: 'bind'
+          device: '${DOCKERHOME}'      
+   X11-unix:
+       driver: local
+       driver_opts:
+          type: 'none'
+          o: 'bind'
+          device: '${X11FOLDER}'
