@@ -1,41 +1,33 @@
-# docker-alghero
+# docker-geant4course
+
+Docker multiarch image for Geant4 courses
 
 you can download these containers with:
 ```
-docker pull carlomt/alghero-geant4:latest
+docker pull carlomt/geant4course:latest
 ```
 
 ## Compose
 
-To simplify the use of these images we developed a Docker Compose file, to use it donwload it to a folder from
+To simplify the use of these images we developed a Docker Compose file, to use it donwload it to a folder:
 
-https://raw.githubusercontent.com/carlomt/docker-alghero/main/docker-compose.yml
-
-if you want to use curl from the terminal:
 ```
-curl https://raw.githubusercontent.com/carlomt/docker-alghero/main/docker-compose.yml --output docker-compose.yml
+curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/docker-compose.yml --output docker-compose.yml
 ```
 
 in the same folder, download one of the following files accordingly to your operating system
-- https://raw.githubusercontent.com/carlomt/docker-alghero/main/env_linux
-- https://raw.githubusercontent.com/carlomt/docker-alghero/main/env_windows
-- https://raw.githubusercontent.com/carlomt/docker-alghero/main/env_mac
-and rename it .env :
-
-`mv env_<YOU_OPERATING_SYSTEM> .env`
-or, using curl (run only one of these commands, accordingly to your operating system):
 
 - linux:
 ```
-curl https://raw.githubusercontent.com/carlomt/docker-alghero/main/env_linux --output .env
+curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_linux --output .env
 ```
 - windows:
 ```
-curl https://raw.githubusercontent.com/carlomt/docker-alghero/main/env_windows --output .env
+curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_windows --output .env
 ```
 - mac: 
 ```
-curl https://raw.githubusercontent.com/carlomt/docker-alghero/main/env_mac --output .env
+curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_mac --output .env
 ```
 
 run:
@@ -110,11 +102,3 @@ Finally, you have to allow X11 forwarding to local containers:
 xhost +localhost
 ```
 the latter command has to be executed every time XQuartz is restarted.
-
-
-## Jupyter
-
-to run jupyter:
-```
-docker compose run --service-ports jupyter
-```
