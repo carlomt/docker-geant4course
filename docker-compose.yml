@@ -39,8 +39,8 @@ services:
       command:
         - |
           /opt/geant4/bin/geant4-config --install-datasets 
-          /usr/bin/curl https://geant4-data.web.cern.ch/geant4-data/releases/source/geant4-`geant4-config --version | awk -F '.'{print $1"."$2}'`.tar.gz --output /usr/local/geant4/geant4.tar.gz          
-          /usr/bin/tar -xvf   /usr/local/geant4/geant4.tar.gz -C /usr/local/geant4/
+          /usr/bin/curl https://geant4-data.web.cern.ch/geant4-data/releases/source/geant4-v`/opt/geant4/bin/geant4-config --version`.tar.gz --output /usr/local/geant4/geant4.tar.gz
+          /usr/bin/tar -xvf   /usr/local/geant4/geant4.tar.gz -C /usr/local/geant4/          
           rm /usr/local/geant4/geant4.tar.gz
           
       stdin_open: true       
