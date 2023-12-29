@@ -1,4 +1,4 @@
-FROM carlomt/geant4:11.2.0-gui
+FROM carlomt/geant4:11.2.0-gui-jammy
 
 LABEL maintainer="carlo.mancini-terracciano@uniroma1.it"
 LABEL org.label-schema.name="carlomt/geant4course"
@@ -8,6 +8,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
     apt-get -yq --no-install-recommends install \
     less \
+    wget \
     emacs \
     vim \
     ssh \
