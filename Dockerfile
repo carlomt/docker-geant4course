@@ -23,4 +23,4 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 
 COPY makelink.sh /etc/profile.d/makelink.sh
 
-ENTRYPOINT  ["/usr/bin/bash", "-l"]
+ENTRYPOINT  ["/usr/bin/bash", "-l", "-c"]
