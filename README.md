@@ -2,6 +2,8 @@
 
 Docker multiarch image for Geant4 courses
 
+Once you installed Docker on your machine (follow that [link](https://docs.docker.com/get-docker/) )
+
 you can download these containers with:
 ```
 docker pull carlomt/geant4course:latest
