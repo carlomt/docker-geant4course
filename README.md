@@ -2,42 +2,8 @@
 
 Docker multiarch image for Geant4 courses
 
-Once you installed Docker on your machine (follow that [link](https://docs.docker.com/get-docker/) )
-
-you can download these containers with:
-```
-docker pull carlomt/geant4course:latest
-```
-
-## Compose
-
-To simplify the use of these images we developed a Docker Compose file, to use it donwload it to a folder:
-
-```
-curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/docker-compose.yml --output docker-compose.yml
-```
-
-in the same folder, download one of the following files accordingly to your operating system
-
-- linux:
-```
-curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_linux --output .env
-```
-- windows:
-```
-curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_windows --output .env
-```
-- mac: 
-```
-curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_mac --output .env
-```
-
-run:
-`docker compose run prepare`
-
-it will create the subfolders, download the Geant4 datasets and source code. Once it has finished, you can run the Geant4 container:
-
-`docker compose run geant4`
+Once you i
+To use it install Docker on your machine (follow that [link](https://docs.docker.com/get-docker/) )
 
 ## GUI
 
@@ -104,3 +70,53 @@ Finally, you have to allow X11 forwarding to local containers:
 xhost +localhost
 ```
 the latter command has to be executed every time XQuartz is restarted.
+
+
+## Preparing the installation
+
+Create a folder for the course and from that folder donwload from this repository the `docker-compose.yml` file:
+```
+curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/docker-compose.yml --output docker-compose.yml
+```
+
+in the same folder, download one of the following files accordingly to your operating system
+
+- linux:
+```
+curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_linux --output .env
+```
+- windows:
+```
+curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_windows --output .env
+```
+- mac: 
+```
+curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_mac --output .env
+```
+
+then, to prepare your installation, run:
+`docker compose run prepare`
+
+it will create the subfolders, download the Geant4 datasets and source code. Once it has finished, you should see these files and subfolders:
+```
+ geant4-datasets/
+ geant4-source/
+ geant4-exercises/
+ docker-home/
+ docker-compose.yml
+```
+
+we suggest you to work in the `geant4-exercises` folder, in the Docker you will find it inside your home
+(in the Docker you will be `root`, so your home will be `/root`).
+You can edit the file both, from the host operating system and from the Docker.
+
+In ` geant4-source` you will have the source code of the last Geant4 version, that directory will also mapped to the Docker in the path
+`/usr/local/geant4/geant4-v<GEEANT4 VERSION>`.
+
+The home in the Docker is mapped in the directory `docker-home`, in this way the bash history is persistant and will be kept even if you close and open again the Docker.
+
+Finally you can run the Geant4 container:
+```
+docker compose run geant4
+```
+
