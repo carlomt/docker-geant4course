@@ -1,48 +1,46 @@
 # docker-geant4course
 
-Docker multiarch image for Geant4 courses
+This repository provides a Docker multi-architecture image for Geant4 courses. It includes all necessary configurations to run Geant4 simulations with a graphical user interface (GUI) across different operating systems and it's designed for the INFN Geant4 courses.
 
-Once you i
-To use it install Docker on your machine (follow that [link](https://docs.docker.com/get-docker/) )
+First, ensure Docker is installed on your machine. You can find installation instructions [here](https://docs.docker.com/get-docker/).
+
 
 ## GUI
 
-To have the graphic user interface you should prepare your operating system host
+To enable the Graphic User Interface, you should prepare your host operating system accordingly.
 
 ### Linux
-Add local connections to X11 access control list:
+Add local connections to the X11 access control list:
 ```
 xhost local:root
 ```
+This command must be executed every time you reboot your computer.
 
-such a command has to be executed every time you reboot your computer
 
 ### Windows
-If you don't have X11 already installed (it should be on the latest versions of Windows 11), download XMing from
-
+If you don't have X11 installed already (it should be included in the latest versions of Windows 11), download XMing from:
 https://sourceforge.net/projects/xming/
 
-use the Powershell terminal to launch docker compose
+Use the Powershell terminal to launch Docker Compose.
+
 
 ### Mac
-Install XQuartz
-
+Install XQuartz from:
 https://www.xquartz.org/
 
-start XQuartz:
+Start XQuartz:
 ```
 open -a XQuartz
 ```
 
-go to XQuartz->Settings and in the `Security` panel enable `Allow connections from network clients`
+Go to XQuartz -> Settings and in the `Security` panel, enable `Allow connections from network clients`.
 
-restart XQuartz:
+Restart XQuartz:
 
-Check where the XQuartz config file, or domain, is located with:
+Check the location of the XQuartz config file, or domain, with:
 ```
 quartz-wm --help
 ```
-
 which should output:
 ```
 usage: quartz-wm OPTIONS
@@ -57,15 +55,15 @@ You can check the default domain  with:
 ```
 defaults read org.xquartz.X11
 ```
-To have GLX acceleration you must enable it with:
+To enable GLX acceleration, you must activate it with:
 ```
 defaults write org.xquartz.X11 enable_iglx -bool true
 ```
-restart XQuartz again. You can check if GLX is now enabled again with:
+Restart XQuartz again. You can verify if GLX is enabled with:
 ```
 defaults read org.xquartz.X11
 ```
-Finally, you have to allow X11 forwarding to local containers:
+Finally, allow X11 forwarding to local containers:
 ```
 xhost +localhost
 ```
@@ -117,7 +115,7 @@ The home in the Docker is mapped in the directory `docker-home`, in this way the
 
 ## Running 
 
-Finally you can run the Geant4 container:
+To start the Geant4 container, execute:
 ```
 docker compose run geant4
 ```
