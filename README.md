@@ -110,7 +110,7 @@ we suggest you to work in the `geant4-exercises` folder, in the Docker you will 
 (in the Docker you will be `root`, so your home will be `/root`).
 You can edit the file both, from the host operating system and from the Docker.
 
-In ` geant4-source` you will have the source code of the last Geant4 version, that directory will also mapped to the Docker in the path
+In `geant4-source` you will have the source code of the last Geant4 version, that directory will also mapped to the Docker in the path
 `/usr/local/geant4/geant4-v<GEEANT4 VERSION>`.
 
 The home in the Docker is mapped in the directory `docker-home`, in this way the bash history is persistant and will be kept even if you close and open again the Docker.
