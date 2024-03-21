@@ -23,30 +23,33 @@ services:
       tty: true
       environment:
          - DISPLAY=${DOCKERDISPLAY}        
-      entrypoint: ["/usr/bin/bash", "-l"]
       volumes:
          - X11-unix:/tmp/.X11-unix
-         - ./geant4-datasets:/opt/geant4/data:ro
-         - ./geant4-source:/usr/local/geant4
-         - ./docker-home:/root
-         - ./geant4-exercises:/root/geant4-exercises         
+         - ./geant4-datasets/:/opt/geant4/data/:ro
+         - ./geant4-source/:/usr/local/geant4/
+         - ./docker-home/:/root/
+         - ./geant4-exercises/:/root/geant4-exercises/
       working_dir: /root
       # depends_on:
       #    data-downloader:
       #      condition: service_completed_successfully
    prepare:
       image: "carlomt/geant4course"
+      #entrypoint: ["/usr/bin/bash", "/opt/bashrc.sh"]
+      entrypoint: ["/usr/bin/bash", "-l", "-c"]
       command:
-        - |
-          /opt/geant4/bin/geant4-config --install-datasets 
-          /usr/bin/curl https://geant4-data.web.cern.ch/geant4-data/releases/source/geant4-v`/opt/geant4/bin/geant4-config --version`.tar.gz --output /usr/local/geant4/geant4.tar.gz
-          /usr/bin/tar -xvf   /usr/local/geant4/geant4.tar.gz -C /usr/local/geant4/          
-          rm /usr/local/geant4/geant4.tar.gz          
-      stdin_open: true       
+         - |
+           /opt/geant4/bin/geant4-config --install-datasets 
+           /usr/bin/curl https://geant4-data.web.cern.ch/geant4-data/releases/source/geant4-v`/opt/geant4/bin/geant4-config --version`.tar.gz --output /usr/local/geant4/geant4.tar.gz
+           /usr/bin/tar -xvf   /usr/local/geant4/geant4.tar.gz -C /usr/local/geant4/
+           rm /usr/local/geant4/geant4.tar.gz
+           echo "We suggest you to work on exercises in this folder" > /root/geant4-exercises/README
+      stdin_open: true    
       tty: true      
       volumes:
-         - ./geant4-datasets:/opt/geant4/data
-         - ./geant4-source:/usr/local/geant4/
+         - ./geant4-datasets/:/opt/geant4/data/
+         - ./geant4-source/:/usr/local/geant4/
+         - ./geant4-exercises/:/root/geant4-exercises/
    root:
       image: "rootproject/root:6.26.14-ubuntu20.04"
       stdin_open: true 
