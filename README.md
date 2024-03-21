@@ -2,6 +2,8 @@
 
 This repository provides a Docker multi-architecture image for Geant4 courses. It includes all necessary configurations to run Geant4 simulations with a graphical user interface (GUI) across different operating systems and it's designed for the INFN Geant4 courses.
 
+Docker is a powerful platform for developing, shipping, and running applications in isolated environments called containers. These containers allow for the packaging of an application with all of its dependencies into a single unit, ensuring that it runs consistently across different computing environments. By 'host operating system', or simply 'host', we refer to the operating system installed on the machine that runs Docker and hosts these containers. By leveraging Docker, you can develop and run code using Geant4 without the need to install Geant4 and its dependencies directly on your host system.
+
 First, ensure Docker is installed on your machine. You can find installation instructions [here](https://docs.docker.com/get-docker/).
 
 
