@@ -115,6 +115,8 @@ In ` geant4-source` you will have the source code of the last Geant4 version, th
 
 The home in the Docker is mapped in the directory `docker-home`, in this way the bash history is persistant and will be kept even if you close and open again the Docker.
 
+## Running 
+
 Finally you can run the Geant4 container:
 ```
 docker compose run geant4
