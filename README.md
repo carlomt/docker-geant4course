@@ -75,8 +75,14 @@ the latter command has to be executed every time XQuartz is restarted.
 ## Preparing the installation
 
 Create a folder for the course and from that folder donwload from this repository the `docker-compose.yml` file:
+
+- linux and mac:
 ```
 curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/docker-compose.yml --output docker-compose.yml
+```
+- windows PowerShell:
+```
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/carlomt/docker-geant4course/main/docker-compose.yml -OutFile docker-compose.yml
 ```
 
 in the same folder, download one of the following files accordingly to your operating system
@@ -87,7 +93,7 @@ curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_linu
 ```
 - windows:
 ```
-curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_windows --output .env
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_windows -OutFile .env
 ```
 - mac: 
 ```
