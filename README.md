@@ -72,59 +72,65 @@ xhost +localhost
 the latter command has to be executed every time XQuartz is restarted.
 
 
-## Preparing the installation
+## Preparing the Installation
 
-Create a folder for the course and from that folder donwload from this repository the `docker-compose.yml` file:
+### 1 Create a folder
+First, you need to create a dedicated folder for the course materials on your computer. 
+After creating this folder, navigate into it using the command line or PowerShell (Windows) with the `cd` command.
 
-- linux and mac:
-```
+### 2 Downloading Required Files
+From within this folder, you will download the necessary Docker configuration and environment setup files. The commands to download these files vary depending on your operating system:
+
+* For Linux and macOS: Use the `curl` command with the `--output` option to specify the filename for the downloaded file.
+- To download docker-compose.yml:
+```bash
 curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/docker-compose.yml --output docker-compose.yml
 ```
-- windows PowerShell:
-```
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/carlomt/docker-geant4course/main/docker-compose.yml -OutFile docker-compose.yml
-```
-
-in the same folder, download one of the following files accordingly to your operating system
-
-- linux:
-```
+- To download the environment file for Linux:
+```bash
 curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_linux --output .env
 ```
-- windows:
-```
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_windows -OutFile .env
-```
-- mac: 
-```
+- To download the environment file for macOS:
+```bash
 curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_mac --output .env
 ```
 
-then, to prepare your installation, run:
-`docker compose run prepare`
-
-it will create the subfolders, download the Geant4 datasets and source code. Once it has finished, you should see these files and subfolders:
+* For Windows (PowerShell): Use Invoke-WebRequest with the -Uri parameter for the URL and -OutFile to specify the output file name.
+- To download docker-compose.yml:
+```powershell
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/carlomt/docker-geant4course/main/docker-compose.yml -OutFile docker-compose.yml
 ```
- geant4-datasets/
- geant4-source/
- geant4-exercises/
- docker-home/
- docker-compose.yml
+To download the environment file for Windows:
+```powershell
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_windows -OutFile .env
 ```
 
-we suggest you to work in the `geant4-exercises` folder, in the Docker you will find it inside your home
-(in the Docker you will be `root`, so your home will be `/root`).
-You can edit the file both, from the host operating system and from the Docker.
+### 3 Preparing the Installation
+After downloading the necessary files, you can prepare your environment by running the following Docker command:
+```
+docker compose run prepare
+```
 
-In `geant4-source` you will have the source code of the last Geant4 version, that directory will also mapped to the Docker in the path
-`/usr/local/geant4/geant4-v<GEEANT4 VERSION>`.
+This step initializes the environment by creating required subfolders, downloading Geant4 datasets and the source code. Once completed, you should have the following structure in your folder:
+```
+geant4-datasets/
+geant4-source/
+geant4-exercises/
+docker-home/
+docker-compose.yml
+```
 
-The home in the Docker is mapped in the directory `docker-home`, in this way the bash history is persistant and will be kept even if you close and open again the Docker.
+It is recommended to work within the `geant4-exercises` folder. This folder, along with others, is mapped inside the Docker container for easy access.
+The `geant4-source` folder contains the source code for the latest Geant4 version and is accessible within the Docker container at `/usr/local/geant4/geant4-v<GEEANT4 VERSION>`.
+The Docker container's home directory is mapped to the docker-home folder on your host machine, ensuring that your bash history remains persistent across Docker sessions.
 
 ## Running 
 
-To start the Geant4 container, execute:
+To start working with the Geant4 environment in Docker, run:
 ```
 docker compose run geant4
 ```
 
+This command launches the Docker container with the Geant4 environment set up, allowing you to begin the course exercises or development work.
+
+Remember, these instructions are tailored to the specific setup described in the repository provided, and slight variations may be necessary depending on updates or changes to the repository or Docker configurations and could be needed to adapt the commands to the host environment.
