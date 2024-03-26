@@ -79,7 +79,7 @@ First, you need to create a dedicated folder for the course materials on your co
 After creating this folder, navigate into it using the command line or PowerShell (Windows) with the `cd` command.
 
 ### 2 Downloading Required Files
-From within this folder, you will download the necessary Docker configuration and environment setup files. The commands to download these files vary depending on your operating system:
+Within this folder, download the necessary Docker configuration and environment setup files. The commands to download these files vary depending on your operating system:
 
 * For Linux and macOS: Use the `curl` command with the `--output` option to specify the filename for the downloaded file.
 - To download docker-compose.yml:
