@@ -81,7 +81,8 @@ After creating this folder, navigate into it using the command line or PowerShel
 ### 2 Downloading Required Files
 Within this folder, download the necessary Docker configuration and environment setup files. The commands to download these files vary depending on your operating system:
 
-* For Linux and macOS: Use the `curl` command with the `--output` option to specify the filename for the downloaded file.
+#### For Linux and macOS 
+Use the `curl` command with the `--output` option to specify the filename for the downloaded file.
 - To download docker-compose.yml:
 ```bash
 curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/docker-compose.yml --output docker-compose.yml
@@ -95,7 +96,8 @@ curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_linu
 curl https://raw.githubusercontent.com/carlomt/docker-geant4course/main/env_mac --output .env
 ```
 
-* For Windows (PowerShell): Use Invoke-WebRequest with the -Uri parameter for the URL and -OutFile to specify the output file name.
+#### For Windows (PowerShell) 
+Use Invoke-WebRequest with the -Uri parameter for the URL and -OutFile to specify the output file name.
 - To download docker-compose.yml:
 ```powershell
 Invoke-WebRequest -Uri https://raw.githubusercontent.com/carlomt/docker-geant4course/main/docker-compose.yml -OutFile docker-compose.yml
