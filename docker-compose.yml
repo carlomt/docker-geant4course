@@ -52,6 +52,25 @@ services:
          - ./geant4-source/:/usr/local/geant4/
          - ./docker-home/:/root/
          - ./geant4-exercises/:/root/geant4-exercises/
+   test:
+      image: "carlomt/geant4course"
+      stdin_open: true 
+      tty: true
+      environment:
+         - DISPLAY=${DOCKERDISPLAY}        
+      volumes:
+         - X11-unix:/tmp/.X11-unix
+         - ./geant4-datasets/:/opt/geant4/data/:ro
+         - ./geant4-source/:/usr/local/geant4/
+         - ./docker-home/:/root/
+         - ./geant4-exercises/:/root/geant4-exercises/
+      working_dir: /root
+      command:
+        - |
+          cp -r /usr/local/geant4/geant4-v`/opt/geant4/bin/geant4-config --version`/examples/basic/B4/B4a/ /root/geant4-exercises/
+          mkdir /root/geant4-exercises/B4a-build
+          cd /root/geant4-exercises/B4a-build && cmake /root/geant4-exercises/B4a && make -j`nproc` && ./exampleB4a
+          
    root:
       image: "rootproject/root:6.26.14-ubuntu20.04"
       stdin_open: true 

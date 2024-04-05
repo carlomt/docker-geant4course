@@ -136,3 +136,24 @@ docker compose run geant4
 This command launches the Docker container with the Geant4 environment set up, allowing you to begin the course exercises or development work.
 
 Remember, these instructions are tailored to the specific setup described in the repository provided, and slight variations may be necessary depending on updates or changes to the repository or Docker configurations and could be needed to adapt the commands to the host environment.
+
+## Testing
+To ensure everything is functioning correctly, you can:
+
+- Verify that the forwarding of X11 is operational by executing this command from the directory where you stored the course materials:
+```
+docker compose run xeyes
+```
+You should see a pair of eyes following the mouse pointer.
+
+- Confirm that 3D graphics acceleration is working with:
+```
+docker compose run gears
+```
+You should observe 3D gears in motion.
+
+- Check if a Geant4 example compiles and displays its GUI by running:
+```
+docker compose run test
+```
+The Geant4 GUI should appear.
