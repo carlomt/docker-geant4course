@@ -35,16 +35,16 @@ services:
       #      condition: service_completed_successfully
    prepare:
       image: "carlomt/geant4course"
-      #entrypoint: ["/usr/bin/bash", "/opt/bashrc.sh"]
-      entrypoint: ["/usr/bin/bash", "-l", "-c"]
       command:
-         - |
-           /opt/geant4/bin/geant4-config --install-datasets 
-           /usr/bin/curl https://geant4-data.web.cern.ch/geant4-data/releases/source/geant4-v`/opt/geant4/bin/geant4-config --version`.tar.gz --output /usr/local/geant4/geant4.tar.gz
-           /usr/bin/tar -xvf   /usr/local/geant4/geant4.tar.gz -C /usr/local/geant4/
-           rm /usr/local/geant4/geant4.tar.gz
-           echo "We suggest you to work on exercises in this folder" > /root/geant4-exercises/README
-           echo "This folder will be mapped as your home (/root) in the container" > /root/README
+        - /bin/bash
+        - -c      
+        - |
+          /opt/geant4/bin/geant4-config --install-datasets 
+          /usr/bin/curl https://geant4-data.web.cern.ch/geant4-data/releases/source/geant4-v$$(/opt/geant4/bin/geant4-config --version).tar.gz --output /usr/local/geant4/geant4.tar.gz
+          /usr/bin/tar -xvf   /usr/local/geant4/geant4.tar.gz -C /usr/local/geant4/
+          rm /usr/local/geant4/geant4.tar.gz
+          echo "We suggest you to work on exercises in this folder" > /root/geant4-exercises/README
+          echo "This folder will be mapped as your home (/root) in the container" > /root/README
       stdin_open: true    
       tty: true      
       volumes:
@@ -66,11 +66,14 @@ services:
          - ./geant4-exercises/:/root/geant4-exercises/
       working_dir: /root
       command:
+        - /bin/bash
+        - -c
         - |
-          cp -r /usr/local/geant4/geant4-v`/opt/geant4/bin/geant4-config --version`/examples/basic/B4/B4a/ /root/geant4-exercises/
-          mkdir /root/geant4-exercises/B4a-build
-          cd /root/geant4-exercises/B4a-build && cmake /root/geant4-exercises/B4a && make -j`nproc` && ./exampleB4a
-          
+          cp -r /usr/local/geant4/geant4-v$$(/opt/geant4/bin/geant4-config --version)/examples/basic/B4/B4a/ /root/geant4-exercises/ &&
+          mkdir -p /root/geant4-exercises/B4a-build &&
+          cd /root/geant4-exercises/B4a-build && cmake /root/geant4-exercises/B4a &&
+          cd /root/geant4-exercises/B4a-build && make -j$$(nproc) &&
+          cd /root/geant4-exercises/B4a-build && ./exampleB4a
    root:
       image: "rootproject/root:6.26.14-ubuntu20.04"
       stdin_open: true 
