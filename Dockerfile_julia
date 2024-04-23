@@ -1,0 +1,33 @@
+FROM ubuntu:jammy
+
+LABEL maintainer="carlo.mancini-terracciano@uniroma1.it"
+
+RUN apt-get update && \
+    apt-get -yq install \
+    curl \
+    less \
+    wget \
+    emacs \
+    vim \
+    ssh \
+    gdb \
+    git \
+    && \
+    apt-get -y autoremove && \
+    apt-get -y clean && \    
+    rm -rf /var/cache/apt/archives/* && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /root/julia && cd /root/julia && \
+    curl -fsSL https://install.julialang.org | sh -s -- --yes && \
+    git clone https://github.com/peremato/Geant4.jl-tutorial.git 
+
+ENV JULIA_PROJECT=@.
+
+COPY julia.sh /root/julia/set.sh
+RUN . /root/julia/set.sh && \
+    cd /root/julia/Geant4.jl-tutorial  && \
+    julia -e 'using Pkg;Pkg.instantiate()' && \
+    julia -e 'using IJulia; installkernel("Julia")'
+    # && \
+    # julia -e 'using IJulia; jupyterlab(dir="tutorial/docs”)'
