@@ -169,3 +169,6 @@ Section "ServerFlags"
     Option "IndirectGLX" "on"  
 EndSection
 ```
+
+If on windows it say that it's no finding the `/tmp/.X11-unix` folder follow this guide
+https://docs.google.com/document/d/14gqqJSBiRxQvJk47GA45qStddieA_BTsifQeJ9CEEkU/edit
