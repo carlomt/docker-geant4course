@@ -157,3 +157,15 @@ You should observe 3D gears in motion.
 docker compose run test
 ```
 The Geant4 GUI should appear.
+
+## Issues
+If you see the Geant4 window but you don't see the geometry of your simulation it means you don't have 3D acceleration properly working. 
+If you have a macOS host, check if you enabled `iglx`. 
+If you have a linux host edit the file
+ `/etc/X11/xorg.conf` adding the following lines:
+```
+Section "ServerFlags"  
+    Option "AllowIndirectGLX" "on"  
+    Option "IndirectGLX" "on"  
+EndSection
+```
