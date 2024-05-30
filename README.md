@@ -126,6 +126,8 @@ It is recommended to work within the `geant4-exercises` folder. This folder, alo
 The `geant4-source` folder contains the source code for the latest Geant4 version and is accessible within the Docker container at `/usr/local/geant4/geant4-v<GEEANT4 VERSION>`.
 The Docker container's home directory is mapped to the docker-home folder on your host machine, ensuring that your bash history remains persistent across Docker sessions.
 
+If you already have the Geant4 datasets installed in a dedicated folder on your computer, you can use that same folder by editing the G4DATASETSPATH variable in the .env file.
+
 ## Running 
 
 To start working with the Geant4 environment in Docker, run:
@@ -172,3 +174,8 @@ EndSection
 
 If on Windows it says that it's no finding the `/tmp/.X11-unix` folder follow this guide
 https://docs.google.com/document/d/14gqqJSBiRxQvJk47GA45qStddieA_BTsifQeJ9CEEkU/edit
+
+Docker Compose doesn't check if the used Docker image is the latest one if it finds an existing image locally. Therefore, if you have already used the Docker image carlomt/geant4course or this docker-compose.yml file, it's better to check if the Docker image has been updated with:
+```
+docker pull carlomt/geant4course
+```
