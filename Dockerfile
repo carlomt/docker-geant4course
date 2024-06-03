@@ -1,4 +1,5 @@
-FROM carlomt/geant4:11.2.1-gui-jammy
+ARG G4_VERSION
+FROM carlomt/geant4:$G4_VERSION-gui-jammy
 
 LABEL maintainer="carlo.mancini-terracciano@uniroma1.it"
 LABEL org.label-schema.name="carlomt/geant4course"
@@ -13,6 +14,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     vim \
     ssh \
     gdb \
+    git \
     && \
     apt-get -y autoremove && \
     apt-get -y clean && \    
@@ -20,8 +22,11 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /usr/local/geant4/ && \
-    ln -s /opt/geant4 /usr/local/geant4/geant4-v`/opt/geant4/bin/geant4-config --version`-install && \
-        ln -s /opt/geant4 /usr/local/geant4/geant4-v11.2.0-install
+    ln -s /opt/geant4 /usr/local/geant4/geant4-v11.2.0-install && \
+    ln -s /opt/geant4 "/usr/local/geant4/geant4-v${G4_VERSION}-install"
+
+
+
 
 COPY ./entrypoint.sh /opt/entrypoint.sh
 RUN chmod +x /opt/entrypoint.sh
