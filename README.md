@@ -126,7 +126,6 @@ It is recommended to work within the `geant4-exercises` folder. This folder, alo
 The `geant4-source` folder contains the source code for the latest Geant4 version and is accessible within the Docker container at `/usr/local/geant4/geant4-v<GEEANT4 VERSION>`.
 The Docker container's home directory is mapped to the docker-home folder on your host machine, ensuring that your bash history remains persistent across Docker sessions.
 
-If you already have the Geant4 datasets installed in a dedicated folder on your computer, you can use that same folder by editing the `G4DATASETSPATH` variable in the `.env` file.
 
 ## Running 
 
