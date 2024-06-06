@@ -23,10 +23,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 
 RUN mkdir -p /usr/local/geant4/ && \
     ln -s /opt/geant4 /usr/local/geant4/geant4-v11.2.0-install && \
-    ln -s /opt/geant4 "/usr/local/geant4/geant4-v${G4_VERSION}-install"
-
-
-
+    ln -s /opt/geant4 /usr/local/geant4/geant4-${G4_VERSION}-install
 
 COPY ./entrypoint.sh /opt/entrypoint.sh
 RUN chmod +x /opt/entrypoint.sh
