@@ -31,7 +31,7 @@ Install XQuartz from:
 https://www.xquartz.org/
 
 Start XQuartz:
-```
+```bash
 open -a XQuartz
 ```
 
@@ -40,11 +40,11 @@ Go to XQuartz -> Settings and in the `Security` panel, enable `Allow connections
 Restart XQuartz:
 
 Check the location of the XQuartz config file, or domain, with:
-```
+```bash
 quartz-wm --help
 ```
 which should output:
-```
+```bash
 usage: quartz-wm OPTIONS
 Aqua window manager for X11.
 
@@ -54,19 +54,19 @@ Aqua window manager for X11.
 ```
 The last line shows the default domain, in this case `org.xquartz.X11`. Before XQuartz 2.8.0 the default domain was: `org.macosforge.xquartz.X11`.
 You can check the default domain  with:
-```
+```bash
 defaults read org.xquartz.X11
 ```
 To enable GLX acceleration, you must activate it with:
-```
+```bash
 defaults write org.xquartz.X11 enable_iglx -bool true
 ```
 Restart XQuartz again. You can verify if GLX is enabled with:
-```
+```bash
 defaults read org.xquartz.X11
 ```
 Finally, allow X11 forwarding to local containers:
-```
+```bash
 xhost +localhost
 ```
 the latter command has to be executed every time XQuartz is restarted.
@@ -160,6 +160,8 @@ docker compose run test
 The Geant4 GUI should appear.
 
 ## Issues
+
+### Geometry visualization on linux
 If you see the Geant4 window but you don't see the geometry of your simulation it means you don't have 3D acceleration properly working. 
 If you have a macOS host, check if you enabled `iglx`. 
 If you have a linux host edit the file
@@ -171,6 +173,7 @@ Section "ServerFlags"
 EndSection
 ```
 
+### Missing folder on Windows
 If on Windows it says that it's no finding the `/tmp/.X11-unix` folder follow this guide
 https://docs.google.com/document/d/14gqqJSBiRxQvJk47GA45qStddieA_BTsifQeJ9CEEkU/edit
 
@@ -178,3 +181,7 @@ Docker Compose doesn't check if the used Docker image is the latest one if it fi
 ```
 docker pull carlomt/geant4course
 ```
+
+### Path not shared from the host in MacOS
+On the last MacOS 14.5 (Sonoma) you may have to allow Docker to access the whole disk from
+System Settings -> Privacy & Security -> Full Disk Access
